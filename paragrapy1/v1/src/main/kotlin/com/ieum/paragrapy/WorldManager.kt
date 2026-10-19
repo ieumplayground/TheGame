@@ -87,6 +87,63 @@ class WorldManager {
         )
     }
 
+    
+    fun buildBuilding(floor: Int) {
+        clearWorld()
+
+        val floorModel = createBox(
+            8f, 0.2f, 18f,
+            Color(0.20f, 0.21f, 0.23f, 1f)
+        )
+        objects.add(ModelInstance(floorModel, 0f, -0.15f, 0f))
+
+        val wall = Color(0.27f, 0.28f, 0.30f, 1f)
+        addWall(8f, 3.2f, 0.2f, 0f, 1.5f, -9f, wall)
+        addWall(8f, 3.2f, 0.2f, 0f, 1.5f, 9f, wall)
+        addWall(0.2f, 3.2f, 18f, -4f, 1.5f, 0f, wall)
+        addWall(0.2f, 3.2f, 18f, 4f, 1.5f, 0f, wall)
+
+        addClue(
+            "stairwell_$floor",
+            "비상계단",
+            "$floor층 비상계단이다.",
+            0f, 0.5f, -7f,
+            Color(0.7f, 0.7f, 0.72f, 1f)
+        )
+    }
+
+    fun buildStreet() {
+        clearWorld()
+
+        val road = createBox(
+            30f, 0.2f, 30f,
+            Color(0.17f, 0.18f, 0.20f, 1f)
+        )
+        objects.add(ModelInstance(road, 0f, -0.15f, 0f))
+
+        val buildingColor = Color(0.25f, 0.24f, 0.25f, 1f)
+
+        addWall(5f, 9f, 5f, -8f, 4.4f, -5f, buildingColor)
+        addWall(5f, 12f, 5f, 8f, 5.9f, -7f, buildingColor)
+        addWall(6f, 7f, 6f, -9f, 3.4f, 9f, buildingColor)
+        addWall(5f, 10f, 5f, 9f, 4.9f, 9f, buildingColor)
+
+        addClue(
+            "fuel", "연료통",
+            "헬기 탈출에 사용할 연료통이다.",
+            -2f, 0.5f, -2f,
+            Color(0.7f, 0.35f, 0.2f, 1f)
+        )
+
+        addClue(
+            "radio", "무전기",
+            "구조 요청에 사용할 수 있다.",
+            3f, 0.4f, 3f,
+            Color(0.3f, 0.6f, 0.4f, 1f)
+        )
+    }
+
+
     private fun addWall(
         w: Float, h: Float, d: Float,
         x: Float, y: Float, z: Float,
@@ -163,58 +220,3 @@ class WorldManager {
     }
 }
 
-
-fun buildBuilding(floor: Int) {
-    clearWorld()
-
-    val floorModel = createBox(
-        8f, 0.2f, 18f,
-        Color(0.20f, 0.21f, 0.23f, 1f)
-    )
-    objects.add(ModelInstance(floorModel, 0f, -0.15f, 0f))
-
-    val wall = Color(0.27f, 0.28f, 0.30f, 1f)
-    addWall(8f, 3.2f, 0.2f, 0f, 1.5f, -9f, wall)
-    addWall(8f, 3.2f, 0.2f, 0f, 1.5f, 9f, wall)
-    addWall(0.2f, 3.2f, 18f, -4f, 1.5f, 0f, wall)
-    addWall(0.2f, 3.2f, 18f, 4f, 1.5f, 0f, wall)
-
-    addClue(
-        "stairwell_$floor",
-        "비상계단",
-        "$floor층 비상계단이다.",
-        0f, 0.5f, -7f,
-        Color(0.7f, 0.7f, 0.72f, 1f)
-    )
-}
-
-fun buildStreet() {
-    clearWorld()
-
-    val road = createBox(
-        30f, 0.2f, 30f,
-        Color(0.17f, 0.18f, 0.20f, 1f)
-    )
-    objects.add(ModelInstance(road, 0f, -0.15f, 0f))
-
-    val buildingColor = Color(0.25f, 0.24f, 0.25f, 1f)
-
-    addWall(5f, 9f, 5f, -8f, 4.4f, -5f, buildingColor)
-    addWall(5f, 12f, 5f, 8f, 5.9f, -7f, buildingColor)
-    addWall(6f, 7f, 6f, -9f, 3.4f, 9f, buildingColor)
-    addWall(5f, 10f, 5f, 9f, 4.9f, 9f, buildingColor)
-
-    addClue(
-        "fuel", "연료통",
-        "헬기 탈출에 사용할 연료통이다.",
-        -2f, 0.5f, -2f,
-        Color(0.7f, 0.35f, 0.2f, 1f)
-    )
-
-    addClue(
-        "radio", "무전기",
-        "구조 요청에 사용할 수 있다.",
-        3f, 0.4f, 3f,
-        Color(0.3f, 0.6f, 0.4f, 1f)
-    )
-}
